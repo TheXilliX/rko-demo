@@ -3,44 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#fbfaf7">
+  <meta name="theme-color" content="#FBFAF7">
   <meta name="description" content="Демонстрационная версия образовательной платформы RKO">
   <title>RKO — Demo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Urbanist:wght@500;700;800;900&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&amp;family=Urbanist:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FBFAF7'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23292929' stroke-width='7'/%3E%3Cpath d='M34 11a21 21 0 0 1 19 21' fill='none' stroke='%23FFAE42' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <div class="splash" id="splash"><span>[ DEMO VERSION ]</span><strong>RKO</strong></div>
-
-  <main class="screen login is-active" id="loginScreen">
-    <p class="corner">[ LOGIN / DEMO ]</p>
-    <form id="loginForm">
-      <h1>ВХОД</h1>
-      <input id="login" type="text" placeholder="ЛОГИН" autocomplete="username">
-      <label class="password"><input id="password" type="password" placeholder="ПАРОЛЬ" autocomplete="current-password"><button id="eye" type="button" aria-label="Показать пароль">◉</button></label>
-      <button class="enter" type="submit">ВОЙТИ</button>
-      <p class="success" id="success">УСПЕШНО</p>
-      <small>В демоверсии подойдут любые логин и пароль.</small>
-    </form>
-  </main>
-
-  <section class="screen welcome" id="welcomeScreen"><p>ДОБРО ПОЖАЛОВАТЬ</p><h1>ВЛАД</h1></section>
-
-  <main class="screen dashboard" id="dashboardScreen">
-    <header><p class="corner">[ RKO / DEMO ]</p><div>ВЛАД <i></i><button id="admin">АДМИН</button><i></i><button id="logout">ВЫЙТИ</button></div></header>
-    <section class="content">
-      <h1 id="pageTitle">ОБУЧЕНИЕ</h1>
-      <div class="guide"><button id="back">← НАЗАД</button><p id="guide">ВЫБЕРИ РАЗДЕЛ, ЧТОБЫ ПОСМОТРЕТЬ ДЕМОНСТРАЦИЮ.</p></div>
-      <div class="list" id="list"></div>
-      <article class="article" id="article"><button id="articleBack">← К МАТЕРИАЛАМ</button><p id="articlePath"></p><h2 id="articleTitle"></h2><div id="articleBody"></div></article>
-      <p class="signature">[ Влад 2Hard ]</p>
+  <div class="app">
+    <section class="splash" id="splash" aria-hidden="true">
+      <p class="service-label splash-label">[ DEMO VERSION ]</p>
+      <p class="splash-word splash-name">Vlad 2Hard</p>
+      <p class="splash-word splash-rko">RKO</p>
     </section>
-  </main>
 
-  <section class="screen no-admin" id="noAdmin"><p>АДМИН-ПАНЕЛЬ</p><h1>НЕ ПОКАЖУ</h1></section>
-  <div class="notice" id="notice">ЭТО ДЕМОНСТРАЦИОННЫЙ МАТЕРИАЛ</div>
-  <script type="module" src="./app.js"></script>
+    <main class="screen auth-page is-active" id="loginScreen" aria-label="Вход в демоверсию">
+      <p class="service-label page-label">[ LOGIN / DEMO ]</p>
+      <form class="auth-form" id="loginForm" novalidate>
+        <h1 class="auth-title">ВХОД</h1>
+        <div class="auth-fields">
+          <label class="field">
+            <span class="visually-hidden">Логин</span>
+            <input id="login" type="text" placeholder="ЛОГИН" autocomplete="username" autocapitalize="none" spellcheck="false">
+          </label>
+          <label class="field password-field">
+            <span class="visually-hidden">Пароль</span>
+            <input id="password" type="password" placeholder="ПАРОЛЬ" autocomplete="current-password">
+            <button class="eye-button" id="eye" type="button" aria-label="Показать пароль" aria-pressed="false">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="12" cy="12" r="2.6" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </button>
+          </label>
+        </div>
+        <div class="auth-footer">
+          <button class="submit-button" type="submit">ВОЙТИ</button>
+          <p class="auth-status" id="success">УСПЕШНО</p>
+          <p class="demo-help">В демоверсии подойдут любые логин и пароль.</p>
+        </div>
+      </form>
+    </main>
+
+    <section class="screen welcome-page" id="welcomeScreen" aria-live="polite">
+      <div class="welcome-content">
+        <p class="welcome-kicker">ДОБРО ПОЖАЛОВАТЬ</p>
+        <h1 class="welcome-title">ВЛАД</h1>
+      </div>
+    </section>
+
+    <main class="screen dashboard-page" id="dashboardScreen">
+      <header class="topbar">
+        <p class="service-label">[ RKO / DEMO ]</p>
+        <div class="account-nav" aria-label="Аккаунт">
+          <span>ВЛАД</span><span class="nav-dot" aria-hidden="true"></span>
+          <button class="admin-mark nav-action" id="admin" type="button">АДМИН</button>
+          <span class="nav-dot" aria-hidden="true"></span>
+          <button class="logout-button nav-action" id="logout" type="button">ВЫЙТИ</button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <section class="learning-shell">
+          <h1 class="display-title" id="pageTitle"><span class="display-initial">О</span>БУЧЕНИЕ</h1>
+          <div class="course-browser" id="browser">
+            <div class="course-guide">
+              <button class="course-guide-back" id="back" type="button">← НАЗАД</button>
+              <p id="guide">ВЫБЕРИ РАЗДЕЛ, ЧТОБЫ ПЕРЕЙТИ К МОДУЛЯМ КУРСА.</p>
+            </div>
+            <div class="course-list" id="list"></div>
+          </div>
+
+          <article class="lesson-reader" id="article" aria-hidden="true">
+            <button class="reader-back" id="articleBack" type="button">← К УРОКАМ</button>
+            <p class="reader-path" id="articlePath"></p>
+            <h2 class="reader-title" id="articleTitle"></h2>
+            <div class="reader-content" id="articleBody"></div>
+          </article>
+          <p class="signature">[ Влад 2Hard ]</p>
+        </section>
+      </div>
+    </main>
+
+    <section class="screen no-admin" id="noAdmin" aria-live="polite">
+      <p>АДМИН-ПАНЕЛЬ</p>
+      <h1>НЕ ПОКАЖУ</h1>
+    </section>
+    <div class="notice" id="notice" role="status">ЭТО ДЕМОНСТРАЦИОННЫЙ МАТЕРИАЛ</div>
+  </div>
+  <script defer src="./app.js"></script>
 </body>
 </html>
